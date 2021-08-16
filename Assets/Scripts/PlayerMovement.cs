@@ -8,6 +8,9 @@ public class PlayerMovement : MonoBehaviour
     private float playerMoveSpeed;
     private float horizontalInput;
     private float verticalInput;
+    public GameObject laserPrefab;
+    public float fireRate = 0.25f;
+    public float canFire = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +21,14 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         playerMovement();
+        if (Input.GetKeyDown(KeyCode.Space)||Input.GetMouseButton(0))
+        {
+            if (Time.time > canFire)
+            {
+                Instantiate(laserPrefab, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+                canFire = Time.time + fireRate;
+            }
+        }
     }
     private void playerMovement()
     {
