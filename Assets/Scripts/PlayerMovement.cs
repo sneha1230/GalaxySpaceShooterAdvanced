@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public bool canTripleShot = false;
     [SerializeField]
     private float playerMoveSpeed;
     private float horizontalInput;
     private float verticalInput;
-    public GameObject laserPrefab;
+    public GameObject laserPrefab,tripleLaserPrefab;
     public float fireRate = 0.25f;
     public float canFire = 0;
     // Start is called before the first frame update
@@ -23,11 +24,23 @@ public class PlayerMovement : MonoBehaviour
         playerMovement();
         if (Input.GetKeyDown(KeyCode.Space)||Input.GetMouseButton(0))
         {
-            if (Time.time > canFire)
+            Shoot();
+        }
+    }
+    private void Shoot()
+    {
+        if (Time.time > canFire)
+        {
+            //if triple shot is true shoot three lasers,if not one laser
+            if (canTripleShot == true)
+            {
+                Instantiate(tripleLaserPrefab, transform.position + new Vector3(-0.55f, 0.5f, 0), Quaternion.identity);//center
+            }
+            else
             {
                 Instantiate(laserPrefab, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
-                canFire = Time.time + fireRate;
             }
+            canFire = Time.time + fireRate;
         }
     }
     private void playerMovement()
@@ -56,5 +69,15 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.position = new Vector3(9.5f, transform.position.y, 0);
         }
+    }
+    public void TripleShotPowerUp()
+    {
+        canTripleShot = true;
+        StartCoroutine(player.TripleShotPowerDown());
+    }
+    public IEnumerator TripleShotPowerDown()
+    {
+        yield return new WaitForSeconds(5.0f);
+        canTripleShot = false;
     }
 }
