@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public bool isSpeedPowerupActive = false;
     public bool canTripleShot = false;
     [SerializeField]
     private float playerMoveSpeed;
@@ -34,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
             //if triple shot is true shoot three lasers,if not one laser
             if (canTripleShot == true)
             {
-                Instantiate(tripleLaserPrefab, transform.position + new Vector3(-0.55f, 0.5f, 0), Quaternion.identity);//center
+                Instantiate(tripleLaserPrefab, transform.position , Quaternion.identity);//center
             }
             else
             {
@@ -47,8 +48,19 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
-        transform.Translate(Vector3.right * Time.deltaTime * playerMoveSpeed * horizontalInput);
-        transform.Translate(Vector3.up * Time.deltaTime * playerMoveSpeed * verticalInput);
+
+        //if speed powerup enabled then move 2x faster the normal speed
+        //else normal speed
+        if (isSpeedPowerupActive == true)
+        {
+            transform.Translate(Vector3.right * Time.deltaTime * playerMoveSpeed *2.0f* horizontalInput);
+            transform.Translate(Vector3.up * Time.deltaTime * playerMoveSpeed *2.0f* verticalInput);
+        }
+        else
+        {
+            transform.Translate(Vector3.right * Time.deltaTime * playerMoveSpeed * horizontalInput);
+            transform.Translate(Vector3.up * Time.deltaTime * playerMoveSpeed * verticalInput);
+        }
 
         //player bounds for y direction
         if (transform.position.y > 0)
@@ -70,14 +82,26 @@ public class PlayerMovement : MonoBehaviour
             transform.position = new Vector3(9.5f, transform.position.y, 0);
         }
     }
+    
     public void TripleShotPowerUp()
     {
         canTripleShot = true;
-        StartCoroutine(player.TripleShotPowerDown());
+        StartCoroutine(TripleShotPowerDown());
+    }
+    //method to enable speed power up and power down
+    public void SpeedPowerUpOn()
+    {
+        isSpeedPowerupActive = true;
+        StartCoroutine(SpeedPowerDown());
     }
     public IEnumerator TripleShotPowerDown()
     {
         yield return new WaitForSeconds(5.0f);
         canTripleShot = false;
+    }
+    public IEnumerator SpeedPowerDown()
+    {
+        yield return new WaitForSeconds(5.0f);
+        isSpeedPowerupActive = false;
     }
 }

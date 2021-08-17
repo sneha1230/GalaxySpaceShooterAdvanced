@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrippleShot : MonoBehaviour
+public class TripleShotAndPowerUp : MonoBehaviour
 {
     [SerializeField]
     private float trippleshotPowerup = 3.0f;
+    [SerializeField]
+    private int powerUpID;
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -26,7 +28,19 @@ public class TrippleShot : MonoBehaviour
             PlayerMovement player = collision.GetComponent<PlayerMovement>();
             if (player != null)
             {
-                player.TripleShotPowerUp();
+                if (powerUpID == 0)
+                {
+                    player.TripleShotPowerUp();
+                }
+                else if (powerUpID == 1)
+                {
+                    //enable speed powerup
+                    player.SpeedPowerUpOn();
+                }
+                else if (powerUpID == 2)
+                {
+                    //enable shields
+                }
             }
             Destroy(this.gameObject);
         }
