@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public GameObject laserPrefab,tripleLaserPrefab;
     public float fireRate = 0.25f;
     public float canFire = 0;
+    public int playerLives = 5;
     // Start is called before the first frame update
     void Start()
     {
@@ -103,5 +104,15 @@ public class PlayerMovement : MonoBehaviour
     {
         yield return new WaitForSeconds(5.0f);
         isSpeedPowerupActive = false;
+    }
+    public void Damage()
+    {
+        //subtract one live from the player lives
+        //if lives<1 then destroy player
+        playerLives--;
+        if (playerLives < 1)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
