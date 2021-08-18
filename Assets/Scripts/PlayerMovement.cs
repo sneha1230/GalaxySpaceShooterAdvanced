@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public float fireRate = 0.25f;
     public float canFire = 0;
     public int playerLives = 5;
+    public GameObject explosion;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,13 +37,14 @@ public class PlayerMovement : MonoBehaviour
             //if triple shot is true shoot three lasers,if not one laser
             if (canTripleShot == true)
             {
-                Instantiate(tripleLaserPrefab, transform.position , Quaternion.identity);//center
+                Instantiate(tripleLaserPrefab, transform.position+new Vector3(0,4,0) , Quaternion.identity);//center
+                canFire = Time.time + fireRate;
             }
             else
             {
                 Instantiate(laserPrefab, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+                canFire = Time.time + fireRate;
             }
-            canFire = Time.time + fireRate;
         }
     }
     private void playerMovement()
@@ -112,6 +114,7 @@ public class PlayerMovement : MonoBehaviour
         playerLives--;
         if (playerLives < 1)
         {
+            Instantiate(explosion, transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }
     }

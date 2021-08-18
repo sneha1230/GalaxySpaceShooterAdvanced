@@ -307,9 +307,11 @@ MonoBehaviour:
   canTripleShot: 0
   playerMoveSpeed: 2
   laserPrefab: {fileID: 6568398486502341408, guid: 6fbfe31e7c965c440b6149bfbf346177, type: 3}
-  tripleLaserPrefab: {fileID: 4965386443188748957, guid: 10caa8bdd28645d44a375f3ea610e510, type: 3}
+  tripleLaserPrefab: {fileID: 6071550988058338457, guid: 0c2a959371133c141b2e015ceb325171, type: 3}
   fireRate: 0.25
   canFire: 0
+  playerLives: 5
+  explosion: {fileID: 4985004848265452290, guid: 14693fdbe168a1740a2cda538b507fca, type: 3}
 --- !u!61 &803593663
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -543,9 +545,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 371825990, guid: d2999db7c907fc245acedd0310d50d69, type: 3}
+      propertyPath: enemyExplosion
+      value: 
+      objectReference: {fileID: 6848809230436146465, guid: 2e9dcdf4e4ab03548b627a422ecba3e4, type: 3}
     - target: {fileID: 4556808388102617725, guid: d2999db7c907fc245acedd0310d50d69, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4556808388102617725, guid: d2999db7c907fc245acedd0310d50d69, type: 3}
       propertyPath: m_LocalPosition.x
@@ -553,7 +559,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4556808388102617725, guid: d2999db7c907fc245acedd0310d50d69, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.57
+      value: 5.89
       objectReference: {fileID: 0}
     - target: {fileID: 4556808388102617725, guid: d2999db7c907fc245acedd0310d50d69, type: 3}
       propertyPath: m_LocalPosition.z
@@ -593,117 +599,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2999db7c907fc245acedd0310d50d69, type: 3}
---- !u!1001 &6764655605474839099
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 6764655604737109272, guid: e6eb61cde3d39194e8db123c192070d9, type: 3}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6764655604737109272, guid: e6eb61cde3d39194e8db123c192070d9, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6764655604737109272, guid: e6eb61cde3d39194e8db123c192070d9, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 3.92
-      objectReference: {fileID: 0}
-    - target: {fileID: 6764655604737109272, guid: e6eb61cde3d39194e8db123c192070d9, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6764655604737109272, guid: e6eb61cde3d39194e8db123c192070d9, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6764655604737109272, guid: e6eb61cde3d39194e8db123c192070d9, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6764655604737109272, guid: e6eb61cde3d39194e8db123c192070d9, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6764655604737109272, guid: e6eb61cde3d39194e8db123c192070d9, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6764655604737109272, guid: e6eb61cde3d39194e8db123c192070d9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6764655604737109272, guid: e6eb61cde3d39194e8db123c192070d9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6764655604737109272, guid: e6eb61cde3d39194e8db123c192070d9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6764655604737109274, guid: e6eb61cde3d39194e8db123c192070d9, type: 3}
-      propertyPath: m_Name
-      value: SpeedPowerUp
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e6eb61cde3d39194e8db123c192070d9, type: 3}
---- !u!1001 &8220040236076174231
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 8220040237517554122, guid: f59bfda3234e196428ad5873e7a40fbf, type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8220040237517554122, guid: f59bfda3234e196428ad5873e7a40fbf, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8220040237517554122, guid: f59bfda3234e196428ad5873e7a40fbf, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8220040237517554122, guid: f59bfda3234e196428ad5873e7a40fbf, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8220040237517554122, guid: f59bfda3234e196428ad5873e7a40fbf, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8220040237517554122, guid: f59bfda3234e196428ad5873e7a40fbf, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8220040237517554122, guid: f59bfda3234e196428ad5873e7a40fbf, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8220040237517554122, guid: f59bfda3234e196428ad5873e7a40fbf, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8220040237517554122, guid: f59bfda3234e196428ad5873e7a40fbf, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8220040237517554122, guid: f59bfda3234e196428ad5873e7a40fbf, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8220040237517554122, guid: f59bfda3234e196428ad5873e7a40fbf, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8220040237517554124, guid: f59bfda3234e196428ad5873e7a40fbf, type: 3}
-      propertyPath: m_Name
-      value: TriplePowerUp
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f59bfda3234e196428ad5873e7a40fbf, type: 3}
