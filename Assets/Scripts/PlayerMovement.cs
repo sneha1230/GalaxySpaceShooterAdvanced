@@ -15,6 +15,8 @@ public class PlayerMovement : MonoBehaviour
     public float canFire = 0;
     public int playerLives = 5;
     public GameObject explosion;
+    public bool isShieldActive = false;
+    public GameObject shieldGameObject;
     // Start is called before the first frame update
     void Start()
     {
@@ -97,6 +99,11 @@ public class PlayerMovement : MonoBehaviour
         isSpeedPowerupActive = true;
         StartCoroutine(SpeedPowerDown());
     }
+    public void EnableShieldPowerUp()
+    {
+        isShieldActive = true;
+        shieldGameObject.SetActive(true);
+    }
     public IEnumerator TripleShotPowerDown()
     {
         yield return new WaitForSeconds(5.0f);
@@ -111,11 +118,21 @@ public class PlayerMovement : MonoBehaviour
     {
         //subtract one live from the player lives
         //if lives<1 then destroy player
-        playerLives--;
-        if (playerLives < 1)
+        //if player has shields do no damage else damage
+        if ((isShieldActive == true))
         {
-            Instantiate(explosion, transform.position, Quaternion.identity);
-            Destroy(this.gameObject);
+            isShieldActive = false;
+            shieldGameObject.SetActive(false);
+            return;
+        }
+        else
+        {
+            playerLives--;
+            if (playerLives < 1)
+            {
+                Instantiate(explosion, transform.position, Quaternion.identity);
+                Destroy(this.gameObject);
+            }
         }
     }
 }
