@@ -6,21 +6,38 @@ public class PlayerMovement : MonoBehaviour
 {
     public bool isSpeedPowerupActive = false;
     public bool canTripleShot = false;
+    public bool isShieldActive = false;
     [SerializeField]
     private float playerMoveSpeed;
     private float horizontalInput;
     private float verticalInput;
-    public GameObject laserPrefab,tripleLaserPrefab;
     public float fireRate = 0.25f;
     public float canFire = 0;
-    public int playerLives = 5;
+    public int playerLives = 3;
+    public GameObject laserPrefab, tripleLaserPrefab;
     public GameObject explosion;
-    public bool isShieldActive = false;
     public GameObject shieldGameObject;
+    private UIManager uiManager;
+    private GameManager gameManager;
+    private SpawnManager spawnManager;
+    private AudioSource audioSource;
+    private AudioClip audioClip;
     // Start is called before the first frame update
     void Start()
     {
         transform.position = new Vector3(0, 0, 0);
+        uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+        audioSource = GameObject.Find("SoundManager").GetComponent<AudioSource>();
+        if (uiManager != null)
+        {
+            uiManager.UpdateLives(playerLives);
+        }
+        if (spawnManager != null)
+        {
+            spawnManager.StartCoroutineFunctions();
+        }
     }
 
     // Update is called once per frame
@@ -40,11 +57,13 @@ public class PlayerMovement : MonoBehaviour
             if (canTripleShot == true)
             {
                 Instantiate(tripleLaserPrefab, transform.position+new Vector3(0,4,0) , Quaternion.identity);//center
+                //audioSource.clip = audioClip[1];
                 canFire = Time.time + fireRate;
             }
             else
             {
                 Instantiate(laserPrefab, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+                //audioSource.clip = audioClip[0];
                 canFire = Time.time + fireRate;
             }
         }
@@ -128,9 +147,12 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             playerLives--;
+            uiManager.UpdateLives(playerLives);
             if (playerLives < 1)
             {
                 Instantiate(explosion, transform.position, Quaternion.identity);
+                gameManager.gameOver = true;
+                uiManager.ShowGameOverScreen();
                 Destroy(this.gameObject);
             }
         }

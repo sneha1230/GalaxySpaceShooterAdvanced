@@ -6,11 +6,12 @@ public class EnemyBehaviourAI : MonoBehaviour
 {
     public GameObject enemyExplosion;
     public float enemySpeed;// a variable to enemy speed
+    private UIManager uiManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
     }
 
     // Update is called once per frame
@@ -34,6 +35,7 @@ public class EnemyBehaviourAI : MonoBehaviour
             }
             Destroy(collision.gameObject);
             Instantiate(enemyExplosion, transform.position, Quaternion.identity);
+            uiManager.UpdateScore();
             Destroy(this.gameObject);
         }
         else if (collision.tag == "Player")

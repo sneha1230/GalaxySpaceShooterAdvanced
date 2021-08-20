@@ -40,6 +40,7 @@ public class TripleShotAndPowerUp : MonoBehaviour
                 else if (powerUpID == 2)
                 {
                     //enable shields
+                    player.EnableShieldPowerUp();
                 }
             }
             Destroy(this.gameObject);
