@@ -21,7 +21,8 @@ public class PlayerMovement : MonoBehaviour
     private GameManager gameManager;
     private SpawnManager spawnManager;
     private AudioSource audioSource;
-    private AudioClip audioClip;
+    [SerializeField]
+    private AudioClip[] audioClip;
     // Start is called before the first frame update
     void Start()
     {
@@ -57,15 +58,20 @@ public class PlayerMovement : MonoBehaviour
             if (canTripleShot == true)
             {
                 Instantiate(tripleLaserPrefab, transform.position+new Vector3(0,4,0) , Quaternion.identity);//center
-                //audioSource.clip = audioClip[1];
-                canFire = Time.time + fireRate;
+                audioSource.clip = audioClip[1];
+                audioSource.Play();
+                //audioSource.playOnAwake = false;
+                audioSource.loop = false;
             }
             else
             {
                 Instantiate(laserPrefab, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
-                //audioSource.clip = audioClip[0];
-                canFire = Time.time + fireRate;
+                audioSource.clip = audioClip[0];
+                audioSource.Play();
+                //audioSource.playOnAwake = false;
+                audioSource.loop = false;
             }
+            canFire = Time.time + fireRate;
         }
     }
     private void playerMovement()

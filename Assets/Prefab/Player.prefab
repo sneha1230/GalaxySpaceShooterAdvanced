@@ -109,6 +109,9 @@ MonoBehaviour:
   tripleLaserPrefab: {fileID: 6071550988058338457, guid: 0c2a959371133c141b2e015ceb325171, type: 3}
   explosion: {fileID: 4985004848265452290, guid: 14693fdbe168a1740a2cda538b507fca, type: 3}
   shieldGameObject: {fileID: 8337810148068962475}
+  audioClip:
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!61 &8337810146414041187
 BoxCollider2D:
   m_ObjectHideFlags: 0
