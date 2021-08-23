@@ -23,6 +23,10 @@ public class PlayerMovement : MonoBehaviour
     private AudioSource audioSource;
     [SerializeField]
     private AudioClip[] audioClip;
+    [SerializeField]
+    private GameObject[] engines;
+
+    private int hitCount;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
         {
             spawnManager.StartCoroutineFunctions();
         }
+        hitCount = 0;
     }
 
     // Update is called once per frame
@@ -144,6 +149,16 @@ public class PlayerMovement : MonoBehaviour
         //subtract one live from the player lives
         //if lives<1 then destroy player
         //if player has shields do no damage else damage
+
+        hitCount++;
+        if (hitCount == 1)
+        {
+            engines[0].SetActive(true);
+        }
+        else if (hitCount == 2)
+        {
+            engines[1].SetActive(true);
+        }
         if ((isShieldActive == true))
         {
             isShieldActive = false;
